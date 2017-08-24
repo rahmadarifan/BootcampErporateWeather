@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">WeatherID</string>
+    <string name="nama_kota_example">Sleman</string>
+    <string name="temp_now_example">30°C</string>
+    <string name="desc_now_example">Cerah</string>
+    <string name="day_example">Sen</string>
+    <string name="time_example">06:00</string>
+    <string name="app_id">653b2fb992e6cfe8a01f9e59c9159ec4</string>
+    <string name="geo_api_key">AIzaSyCTucjlLgCLRMZSJTrQTIeK9qI_Raf-Xfs</string>
+    <string name="place_api_key">AIzaSyC8jZhIA3OqjV0F2ygU8ODqjjicKSbIenc</string>
+    <string name="humidity">Kelembapan</string>
+    <string name="pressure">Tekanan</string>
+    <string name="wind_speed">Kecepatan Udara</string>
+    <string name="humidity_example">98%</string>
+    <string name="pressure_example">991.98 hPa</string>
+    <string name="wind_speed_example">1.22 m/s</string>
+    <string name="celcius">°C</string>
+</resources>
