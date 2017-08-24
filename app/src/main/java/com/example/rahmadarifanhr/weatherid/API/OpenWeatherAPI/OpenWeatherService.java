@@ -26,4 +26,10 @@ public interface OpenWeatherService {
             @Query("units") String units,
             @Query("appid") String appid
     );
+
+    @GET("weather")
+    Call<DataModelWeatherToday.Example> getWeatherTodayByCity(
+            @Query("q") String cityname,
+            @Query("units") String units,
+            @Query("appid") String appid);
 }

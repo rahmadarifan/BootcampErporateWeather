@@ -3,7 +3,6 @@ package com.example.rahmadarifanhr.weatherid.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,22 +27,24 @@ public class TempTodayAdapter extends RecyclerView.Adapter<TempTodayAdapter.Temp
     private List<DataModelForecast.List> listTempTodays;
     private List<DataModelForecast.List> tmpListTempToday;
     private Context context;
+    private String satuanCuaca;
 
     public class TempTodayHolders extends RecyclerView.ViewHolder {
 
-        public TextView timeToday, tempTimeToday;
-        public ImageView iconTimeToday;
+        public TextView time, temp_weather;
+        public ImageView icon_weather;
 
         public TempTodayHolders(View view) {
             super(view);
-            timeToday = view.findViewById(R.id.time_today);
-            iconTimeToday = view.findViewById(R.id.icon_weather_time_today);
-            tempTimeToday = view.findViewById(R.id.temp_weather_time_today);
+            time = view.findViewById(R.id.time);
+            icon_weather = view.findViewById(R.id.icon_weather);
+            temp_weather = view.findViewById(R.id.temp_weather);
             context = view.getContext();
         }
     }
 
-    public TempTodayAdapter(List<DataModelForecast.List> listTempTodays) {
+    public TempTodayAdapter(List<DataModelForecast.List> listTempTodays, String satuanCuaca) {
+        this.satuanCuaca = satuanCuaca;
         this.listTempTodays = listTempTodays;
         tmpListTempToday = new ArrayList<>();
         generateTime();
@@ -51,15 +52,16 @@ public class TempTodayAdapter extends RecyclerView.Adapter<TempTodayAdapter.Temp
 
     @Override
     public TempTodayHolders onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_weather_today, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_weather, parent, false);
         return new TempTodayHolders(itemView);
     }
 
     @Override
     public void onBindViewHolder(TempTodayHolders holder, int position) {
-        holder.timeToday.setText(tmpListTempToday.get(position).getDtTxt().substring(11, 16));
-//        holder.gambarTempToday.setImageResource(listTempToday.getGambarTempToday());
-        holder.tempTimeToday.setText(tmpListTempToday.get(position).getMain().getTemp() + context.getResources().getString(R.string.celcius));
+        holder.time.setText(tmpListTempToday.get(position).getDtTxt().substring(11, 16));
+        int id = context.getResources().getIdentifier("weather_"+tmpListTempToday.get(position).getWeather().get(0).getIcon(), "drawable", context.getPackageName());
+        holder.icon_weather.setImageResource(id);
+        holder.temp_weather.setText(tmpListTempToday.get(position).getMain().getTemp() + satuanCuaca);
     }
 
     @Override

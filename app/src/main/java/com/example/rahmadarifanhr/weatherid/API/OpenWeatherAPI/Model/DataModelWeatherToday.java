@@ -342,6 +342,27 @@ public class DataModelWeatherToday {
         }
 
         public String getDescription() {
+            if (description.equals("clear sky")){
+                description = "Cerah";
+            } else if(description.equals("few clouds")){
+                description = "Cerah Berawan";
+            } else if (description.equals("scattered clouds")){
+                description = "Berawan";
+            } else if (description.equals("broken clouds")){
+                description = "Mendung";
+            } else if (description.equals("shower rain")){
+                description = "Gerimis";
+            } else if (description.equals("rain")){
+                description = "Hujan";
+            } else if (description.equals("thunderstorm")){
+                description = "Hujan Badai";
+            } else if (description.equals("snow")){
+                description = "Bersalju";
+            } else if (description.equals("mist")){
+                description = "Berkabut";
+            } else {
+
+            }
             return description;
         }
 

@@ -26,39 +26,41 @@ public class TempDailyAdapter extends RecyclerView.Adapter<TempDailyAdapter.Temp
     private List<DataModelForecast.List> listTempDailys;
     private List<DataModelForecast.List> tmpListTempDailys;
     private Context context;
+    private String satuanCuaca;
     public class TempDailyHolders extends RecyclerView.ViewHolder {
 
-        public TextView day_name, temp_daily_min, temp_daily_max;
-        public ImageView iconTempDaily;
+        public TextView time, temp_weather;
+        public ImageView icon_weather;
 
         public TempDailyHolders(View view) {
             super(view);
-            day_name = (TextView) view.findViewById(R.id.day_name);
-            temp_daily_min = (TextView) view.findViewById(R.id.temp_daily_min);
-            temp_daily_max = (TextView) view.findViewById(R.id.temp_daily_max);
-            iconTempDaily = (ImageView) view.findViewById(R.id.icon_daily_min);
+            time = view.findViewById(R.id.time);
+            icon_weather = view.findViewById(R.id.icon_weather);
+            temp_weather = view.findViewById(R.id.temp_weather);
             context = view.getContext();
         }
     }
 
-    public TempDailyAdapter(List<DataModelForecast.List> listTempDailys) {
+    public TempDailyAdapter(List<DataModelForecast.List> listTempDailys, String satuanCuaca) {
         this.listTempDailys = listTempDailys;
         tmpListTempDailys = new ArrayList<>();
+        this.satuanCuaca = satuanCuaca;
         generateDay();
 
     }
 
     @Override
     public TempDailyHolders onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_weather_daily, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_weather, parent, false);
         return new TempDailyHolders(itemView);
     }
 
     @Override
     public void onBindViewHolder(TempDailyHolders holder, int position) {
-        holder.day_name.setText(getDayName(tmpListTempDailys.get(position).getDtTxt().substring(0, 10)));
-        holder.temp_daily_min.setText(tmpListTempDailys.get(position).getMain().getTempMin() + context.getResources().getString(R.string.celcius));
-        holder.temp_daily_max.setText(tmpListTempDailys.get(position).getMain().getTempMax() + context.getResources().getString(R.string.celcius));
+        holder.time.setText(getDayName(tmpListTempDailys.get(position).getDtTxt().substring(0, 10)));
+        holder.temp_weather.setText(tmpListTempDailys.get(position).getMain().getTemp() + satuanCuaca);
+        int id = context.getResources().getIdentifier("weather_"+tmpListTempDailys.get(position).getWeather().get(0).getIcon(), "drawable", context.getPackageName());
+        holder.icon_weather.setImageResource(id);
 
     }
 
