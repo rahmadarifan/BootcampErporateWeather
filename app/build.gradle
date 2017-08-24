@@ -18,6 +18,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    buildTypes.each{
+        it.buildConfigField 'String', 'OPENWEATHER_API_KEY', OPENWEATHER_API_KEY
+        it.buildConfigField 'String', 'GEOCODE_API_KEY', GEOCODE_API_KEY
+        it.buildConfigField 'String', 'PLACE_API_KEY', PLACE_API_KEY
+    }
 }
 
 dependencies {
@@ -43,3 +49,4 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:4.0.0'
     testCompile 'junit:junit:4.12'
 }
+

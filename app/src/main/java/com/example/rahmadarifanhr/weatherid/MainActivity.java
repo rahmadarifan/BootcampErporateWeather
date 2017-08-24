@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             String latitude = String.valueOf(myLocation.getLatitude());
             String longitude = String.valueOf(myLocation.getLongitude());
             final String unit = "metric";
-            String appid = getResources().getString(R.string.app_id);
+            String appid = BuildConfig.OPENWEATHER_API_KEY;
 
             Call<DataModelWeatherToday.Example> call = openWeatherService.getWeatherToday(latitude, longitude, unit, appid);
             call.enqueue(new Callback<DataModelWeatherToday.Example>() {
@@ -193,13 +193,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                 }
             });
 
-            Call<DataModelGeoCode.Example> dataGeoCode = googleMapService.getGeocodeData(latitude + ", " + longitude, getResources().getString(R.string.geo_api_key));
+            Call<DataModelGeoCode.Example> dataGeoCode = googleMapService.getGeocodeData(latitude + ", " + longitude, BuildConfig.GEOCODE_API_KEY);
             dataGeoCode.enqueue(new Callback<DataModelGeoCode.Example>() {
                 @Override
                 public void onResponse(Call<DataModelGeoCode.Example> call, Response<DataModelGeoCode.Example> response) {
                     int n = response.body().getResults().size() - 2;
                     if (n < 0) n = 0;
-                    Call<DataModelPlace.Example> dataPlace = googleMapService.getPlaceData(response.body().getResults().get(n).getPlaceId(), getResources().getString(R.string.place_api_key));
+                    Call<DataModelPlace.Example> dataPlace = googleMapService.getPlaceData(response.body().getResults().get(n).getPlaceId(), BuildConfig.PLACE_API_KEY);
                     dataPlace.enqueue(new Callback<DataModelPlace.Example>() {
                         @Override
                         public void onResponse(Call<DataModelPlace.Example> call, Response<DataModelPlace.Example> response) {
@@ -208,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                                 Log.v(TAG, "Ada");
                                 String url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&photoreference=";
                                 String photo_reference = response.body().getResult().getPhotos().get(0).getPhotoReference();
-                                url += photo_reference + "&key=" + getResources().getString(R.string.place_api_key);
+                                url += photo_reference + "&key=" + BuildConfig.PLACE_API_KEY;
 
                                 if (imageViewCity != null)
                                     Glide.with(MainActivity.this).load(url).listener(new RequestListener<Drawable>() {
