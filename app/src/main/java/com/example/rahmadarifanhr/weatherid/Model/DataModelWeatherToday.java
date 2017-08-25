@@ -204,7 +204,9 @@ public class DataModelWeatherToday {
         private String grndLevel;
 
         public String getTemp() {
-            return temp;
+            Double tempNow = Double.parseDouble(temp);
+            int tempPembulatan = (int) Math.round(tempNow);
+            return ""+tempPembulatan;
         }
 
         public void setTemp(String temp) {
